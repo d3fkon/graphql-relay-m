@@ -21,6 +21,30 @@ import {
     getViewer
 } from './database';
 
+const {
+    nodeInterface,
+    nodeField
+} = nodeDefinitions((globalId) => {
+    const {type, id} = fromGlobalId(globalId);
+    if(type === 'Friend') {
+        return getFriend(id)
+    }
+    else if(type === 'User') {
+        return getUser(id);
+    }
+    return null;
+},
+    (obj) => {
+        if(obj instanceof Friend) {
+            return GraphQLFriend;
+        }
+        else if (obj instanceof User) {
+            return GraphQLUser;
+        }
+        return null;
+    }
+); 
+
 const GraphQLUser = new GraphQLObjectType({
     name: 'User',
     fields: () => ({
@@ -31,7 +55,7 @@ const GraphQLUser = new GraphQLObjectType({
             resolve: (_, args) => connectionFromArray(getFriends(), args)
         },
     }),
-    inerface: [nodeInterface]
+    interface: [nodeInterface]
 })
 
 const GraphQLFriend = new GraphQLObjectType({
@@ -59,30 +83,6 @@ const GraphQLFriend = new GraphQLObjectType({
     }),
     interface: [nodeInterface]
 });
-
-const {
-    nodeInterface,
-    nodeField
-} = nodeDefinitions((globalId) => {
-    const {type, id} = fromGlobalId(globalId);
-    if(type === 'Friend') {
-        return getFriend(id)
-    }
-    else if(type === 'User') {
-        return getUser(id);
-    }
-    return null;
-},
-    (obj) => {
-        if(obj instanceof Friend) {
-            return GraphQLFriend;
-        }
-        else if (obj instanceof User) {
-            return GraphQLUser;
-        }
-        return null;
-    }
-); 
 
 const {
     connectionType: friendsConnection

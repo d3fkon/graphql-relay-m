@@ -16,10 +16,11 @@ const friends = data.map((f) => {
     friend.language = f.language;
     friend.email = f.email;
     friend.image = f.image;
+    return friend;
 });
 
 module.exports = {
-    getUser: (id) => id === user.id? viewer: null,
+    getUser: (id) => id === User.id? viewer: null,
     getViewer: () => viewer,
     getFriend: (id) => friends.find(w => w.id === id),
     getFriends: () => friends,
