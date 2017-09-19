@@ -14,14 +14,14 @@ const friends = data.map((f) => {
     friend.lastName = f.lastName;
     friend.gender = f.gender;
     friend.language = f.language;
-    friend.email. f.email;
+    friend.email = f.email;
     friend.image = f.image;
 });
 
 module.exports = {
     getUser: (id) => id === user.id? viewer: null,
     getViewer: () => viewer,
-    getFriend: (id) => friends.find(w => w.id == id),
+    getFriend: (id) => friends.find(w => w.id === id),
     getFriends: () => friends,
     User,
     Friend

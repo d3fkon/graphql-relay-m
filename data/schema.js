@@ -1,5 +1,5 @@
 import {
-    GraohQLObjectType,
+    GraphQLObjectType,
     GraphQLSchema,
     GraphQLString
 } from 'graphql';
@@ -21,31 +21,7 @@ import {
     getViewer
 } from './database';
 
-const {
-    nodeInterface,
-    nodeField
-} = nodeDefinitions((globalId) => {
-    const {type, id} = fromGlobalId(globalId);
-    if(type === 'Friend') {
-        return getFriend(id)
-    }
-    else if(type === 'User') {
-        return getUser(id);
-    }
-    return null;
-},
-    (obj) => {
-        if(obj instanceof Friend) {
-            return GraphQLFriend;
-        }
-        else if (obj instanceof User) {
-            return GraphQLUser;
-        }
-        return null;
-    }
-); 
-
-const GrqphQLUser = new GraphQLObjectType({
+const GraphQLUser = new GraphQLObjectType({
     name: 'User',
     fields: () => ({
         id: globalIdField('User'),
@@ -74,7 +50,7 @@ const GraphQLFriend = new GraphQLObjectType({
         language: {
             type: GraphQLString
         },
-        enauk: {
+        email: {
             type: GraphQLString
         },
         image: {
@@ -83,6 +59,30 @@ const GraphQLFriend = new GraphQLObjectType({
     }),
     interface: [nodeInterface]
 });
+
+const {
+    nodeInterface,
+    nodeField
+} = nodeDefinitions((globalId) => {
+    const {type, id} = fromGlobalId(globalId);
+    if(type === 'Friend') {
+        return getFriend(id)
+    }
+    else if(type === 'User') {
+        return getUser(id);
+    }
+    return null;
+},
+    (obj) => {
+        if(obj instanceof Friend) {
+            return GraphQLFriend;
+        }
+        else if (obj instanceof User) {
+            return GraphQLUser;
+        }
+        return null;
+    }
+); 
 
 const {
     connectionType: friendsConnection
@@ -102,6 +102,6 @@ const Query = new GraphQLObjectType({
     })
 })
 
-export default schema = new GraphQLSchema({
+export const schema = new GraphQLSchema({
     query: Query
 })

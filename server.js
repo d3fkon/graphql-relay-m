@@ -1,3 +1,4 @@
+
 import express from 'express';
 import graphqlHTTP from 'express-graphql';
 import path from 'path';
@@ -23,12 +24,12 @@ graphQLServer.listen(GRAPHQL_PORT, () => {
 });
 
 const compiler = webpack({
-    entry: ['whateg-fetch', path.resolve(__dirname, 'src', 'app.js')],
+    entry: ['whatwg-fetch', path.resolve(__dirname, 'src', 'app.js')],
     module: {
         loaders: [{
             exclude: /node_modules/,
             loader: 'babel-loader',
-            test: /\/js$/
+            test: /\.js$/
         }]
     },
     output: {
