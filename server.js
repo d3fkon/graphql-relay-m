@@ -24,12 +24,15 @@ graphQLServer.listen(GRAPHQL_PORT, () => {
 });
 
 const compiler = webpack({
-    entry: ['whatwg-fetch', path.resolve(__dirname, 'src', 'app.js')],
+    entry: ['whatwg-fetch', path.resolve(__dirname, 'src', 'App.js')],
     module: {
         loaders: [{
             exclude: /node_modules/,
             loader: 'babel-loader',
-            test: /\.js$/
+            test: /\.js$/,
+            query: {
+                presets: ['es2015', 'react']
+            }
         }]
     },
     output: {
@@ -41,7 +44,7 @@ const compiler = webpack({
 const app = new webpackDevServer(compiler, {
     contentBase: '/public/',
     proxy: {
-        '/graphql': `http://localhost:${APP_PORT}`
+        '/graphql': `http://localhost:${GRAPHQL_PORT}`
     },
     publicPath: '/src/',
     stats: {
