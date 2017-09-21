@@ -19,7 +19,7 @@ export default createFragmentContainer(Friends, {
 	viewer: graphql`
 		fragment Friends_viewer on User {
 			id
-			...FriendList_viewer
+			...FriendsList_viewer
 		}
 	`
 });

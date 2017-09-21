@@ -1,12 +1,12 @@
 import React from "react";
 import ReactDOM from "react-dom";
-import { QueryRenderer, grqphql } from "react-relay";
+import { QueryRenderer, graphql } from "react-relay";
 import { Environment, Network, RecordSource, Store } from "relay-runtime";
 
 import Friends from "./components/friends";
 
 function fetchQuery(opertions, variables) {
-	return fetch("/grqphql", {
+	return fetch("/graphql", {
 		method: "POST",
 		headers: {
 			"Content-Type": "application/json"
@@ -16,6 +16,7 @@ function fetchQuery(opertions, variables) {
 			variables
 		})
 	}).then(response => {
+
 		return response.json();
 	});
 }
@@ -25,12 +26,12 @@ const modernEnvironment = new Environment({
 	store: new Store(new RecordSource())
 });
 
-const mountNode = document.getElementById("root");
+const mountNode = document.getElementById('root');
 
 ReactDOM.render(
 	<QueryRenderer
 		environment={modernEnvironment}
-		query={grqphql`
+		query={graphql`
                 query AppQuery {
                     viewer {
                         ...Friends_viewer

@@ -29,7 +29,7 @@ const fragment /*: ConcreteFragment*/ = {
     },
     {
       "kind": "FragmentSpread",
-      "name": "FriendList_viewer",
+      "name": "FriendsList_viewer",
       "args": null
     }
   ],

@@ -4,7 +4,7 @@ import Friend from "./Friend";
 
 class FriendsList extends Component {
 	renderFriends() {
-		return this.props.viewer.friends.edges.mao(edge => (
+		return this.props.viewer.friends.edges.map(edge => (
 			<Friend
 				key={edge.node.id}
 				friend={edge.node}
@@ -35,7 +35,7 @@ export default createFragmentContainer(FriendsList, {
 				}
 			}
 			id
-			...FriendList_viewer
+			...Friend_viewer
 		}
 	`
 });

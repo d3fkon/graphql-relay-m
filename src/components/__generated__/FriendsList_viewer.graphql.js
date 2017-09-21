@@ -81,7 +81,7 @@ const fragment /*: ConcreteFragment*/ = {
     },
     {
       "kind": "FragmentSpread",
-      "name": "FriendList_viewer",
+      "name": "Friend_viewer",
       "args": null
     }
   ],

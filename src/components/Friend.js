@@ -5,7 +5,7 @@ class Friend extends Component {
 	render() {
 		return (
 			<li>
-				{this.props.friends.firstName} {this.props.friend.lastName}
+				{this.props.friend.firstName} {this.props.friend.lastName}
 			</li>
 		);
 	}
